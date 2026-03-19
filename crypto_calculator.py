@@ -79,8 +79,7 @@ def menu_matematica_modular():
         if opcion == "1":
             calcular_modulo()
         elif opcion == "2":
-            print("En construcción...")
-            pausar()
+            inverso_aditivo()
         elif opcion == "3":
             print("En construcción...")
             pausar()
@@ -111,6 +110,21 @@ def calcular_modulo():
         resultado = a % n
 
         print(f"\nResultado: {a} mod {n} = {resultado}")
+
+    except:
+        print("Error: entrada inválida")
+
+    pausar()
+
+
+def inverso_aditivo():
+    try:
+        a = int(input("Ingrese el número a: "))
+        n = int(input("Ingrese el módulo n: "))
+
+        inverso = (-a) % n
+
+        print(f"\nEl inverso aditivo de {a} mod {n} es: {inverso}")
 
     except:
         print("Error: entrada inválida")
