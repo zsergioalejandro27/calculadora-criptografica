@@ -43,8 +43,7 @@ def menu_principal():
         elif opcion == "4":
             menu_hash()
         elif opcion == "5":
-            print("En construcción...")
-            pausar()
+            menu_codificacion()
         elif opcion == "6":
             print("En construcción...")
             pausar()
@@ -183,6 +182,34 @@ def menu_hash():
             print("Opción inválida")
             pausar()
 
+# =================
+# MENÚ CODIFICACIÓN
+# =================
+def menu_codificacion():
+    while True:
+        limpiar()
+        print("=== CODIFICACIÓN ===")
+        print("1. ASCII")
+        print("2. Hexadecimal")
+        print("3. Binario")
+        print("4. Base64")
+        print("0. Volver")
+
+        opcion = input("\nSeleccione una opción: ")
+
+        if opcion == "1":
+            ascii_codificacion()
+        elif opcion == "2":
+            hex_codificacion()
+        elif opcion == "3":
+            binario_codificacion()
+        elif opcion == "4":
+            base64_codificacion()
+        elif opcion == "0":
+            break
+        else:
+            print("Opción inválida")
+            pausar()
 
 # =============================
 # FUNCIONES MATEMÁTICA MODULAR
@@ -559,6 +586,69 @@ def hash_sha512():
     print(f"\nSHA512: {resultado}")
     pausar()
 
+# ======================
+# FUNCIONES CODIFICACIÓN
+# ======================
+def ascii_codificacion():
+    texto = input("Ingrese el texto: ")
+
+    codificado = [ord(c) for c in texto]
+    print(f"\nASCII: {codificado}")
+
+    decodificar = input("¿Desea decodificar? (s/n): ")
+
+    if decodificar.lower() == "s":
+        numeros = input("Ingrese números separados por espacio: ").split()
+        resultado = "".join(chr(int(n)) for n in numeros)
+        print(f"Texto: {resultado}")
+
+    pausar()
+
+
+def hex_codificacion():
+    texto = input("Ingrese el texto: ")
+
+    codificado = texto.encode().hex()
+    print(f"\nHex: {codificado}")
+
+    decodificar = input("¿Desea decodificar? (s/n): ")
+
+    if decodificar.lower() == "s":
+        hex_input = input("Ingrese el texto en hex: ")
+        resultado = bytes.fromhex(hex_input).decode()
+        print(f"Texto: {resultado}")
+
+    pausar()
+
+def binario_codificacion():
+    texto = input("Ingrese el texto: ")
+
+    codificado = " ".join(format(ord(c), '08b') for c in texto)
+    print(f"\nBinario: {codificado}")
+
+    decodificar = input("¿Desea decodificar? (s/n): ")
+
+    if decodificar.lower() == "s":
+        bin_input = input("Ingrese binarios separados por espacio: ").split()
+        resultado = "".join(chr(int(b, 2)) for b in bin_input)
+        print(f"Texto: {resultado}")
+
+    pausar()
+
+def base64_codificacion():
+    texto = input("Ingrese el texto: ")
+
+    codificado = base64.b64encode(texto.encode()).decode()
+    print(f"\nBase64: {codificado}")
+
+    decodificar = input("¿Desea decodificar? (s/n): ")
+
+    if decodificar.lower() == "s":
+        b64_input = input("Ingrese Base64: ")
+        resultado = base64.b64decode(b64_input).decode()
+        print(f"Texto: {resultado}")
+
+    pausar()
 # =========================
 # MAIN
 # =========================
