@@ -39,8 +39,7 @@ def menu_principal():
         elif opcion == "2":
             menu_criptografia_clasica()
         elif opcion == "3":
-            print("En construcción...")
-            pausar()
+            menu_criptografia_moderna()
         elif opcion == "4":
             print("En construcción...")
             pausar()
@@ -126,6 +125,33 @@ def menu_criptografia_clasica():
             cifrado_afin()
         elif opcion == "7":
             sustitucion_simple()
+        elif opcion == "0":
+            break
+        else:
+            print("Opción inválida")
+            pausar()
+
+# =========================
+# MENÚ CRIPTOGRAFÍA MODERNA
+# =========================
+
+def menu_criptografia_moderna():
+    while True:
+        limpiar()
+        print("=== CRIPTOGRAFÍA MODERNA ===")
+        print("1. Diffie-Hellman")
+        print("2. RSA")
+        print("3. Exponenciación rápida")
+        print("0. Volver")
+
+        opcion = input("\nSeleccione una opción: ")
+
+        if opcion == "1":
+            diffie_hellman()
+        elif opcion == "2":
+            rsa()
+        elif opcion == "3":
+            exponenciacion_rapida()
         elif opcion == "0":
             break
         else:
@@ -388,7 +414,94 @@ def sustitucion_simple():
     print(f"\nTexto cifrado: {resultado}")
     pausar()
 
+# ===============================
+# FUNCIONES CRIPTOGRAFÍA MODERNA
+# ===============================
 
+def diffie_hellman():
+    try:
+        p = int(input("Ingrese número primo p: "))
+        g = int(input("Ingrese generador g: "))
+
+        a = int(input("Clave privada de A: "))
+        b = int(input("Clave privada de B: "))
+
+        A = (g ** a) % p
+        B = (g ** b) % p
+
+        clave_A = (B ** a) % p
+        clave_B = (A ** b) % p
+
+        print(f"\nClave pública de A: {A}")
+        print(f"Clave pública de B: {B}")
+
+        print(f"\nClave compartida (A): {clave_A}")
+        print(f"Clave compartida (B): {clave_B}")
+
+    except:
+        print("Error en los datos")
+
+    pausar()
+
+
+def rsa():
+    try:
+        p = int(input("Ingrese primo p: "))
+        q = int(input("Ingrese primo q: "))
+
+        n = p * q
+        phi = (p - 1) * (q - 1)
+
+        e = int(input("Ingrese valor de e: "))
+
+        # buscar d (inverso de e mod phi)
+        d = None
+        for i in range(1, phi):
+            if (e * i) % phi == 1:
+                d = i
+                break
+
+        print(f"\nn = {n}")
+        print(f"phi(n) = {phi}")
+        print(f"Clave pública: ({e}, {n})")
+        print(f"Clave privada: ({d}, {n})")
+
+        mensaje = int(input("\nIngrese mensaje numérico: "))
+
+        cifrado = (mensaje ** e) % n
+        descifrado = (cifrado ** d) % n
+
+        print(f"\nMensaje cifrado: {cifrado}")
+        print(f"Mensaje descifrado: {descifrado}")
+
+    except:
+        print("Error en los datos")
+
+    pausar()
+
+
+def exponenciacion_rapida():
+    try:
+        base = int(input("Ingrese la base: "))
+        exponente = int(input("Ingrese el exponente: "))
+        mod = int(input("Ingrese el módulo: "))
+
+        resultado = 1
+        base = base % mod
+
+        while exponente > 0:
+            if exponente % 2 == 1:
+                resultado = (resultado * base) % mod
+
+            base = (base * base) % mod
+            exponente //= 2
+
+        print(f"\nResultado: {resultado}")
+
+    except:
+        print("Error en los datos")
+
+    pausar()
 # =========================
 # MAIN
 # =========================
