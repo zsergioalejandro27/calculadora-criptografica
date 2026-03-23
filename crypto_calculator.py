@@ -37,8 +37,7 @@ def menu_principal():
         if opcion == "1":
             menu_matematica_modular()
         elif opcion == "2":
-            print("En construcción...")
-            pausar()
+            menu_criptografia_clasica()
         elif opcion == "3":
             print("En construcción...")
             pausar()
@@ -95,8 +94,47 @@ def menu_matematica_modular():
             pausar()
 
 # =========================
-# FUNCIONES MATEMÁTICA MODULAR
+# MENÚ CRIPTOGRAFÍA CLÁSICA
 # =========================
+
+def menu_criptografia_clasica():
+    while True:
+        limpiar()
+        print("=== CRIPTOGRAFÍA CLÁSICA ===")
+        print("1. Cifrado Módulo 27")
+        print("2. Cifrado César")
+        print("3. Cifrado Vernam (XOR)")
+        print("4. Cifrado ATBASH")
+        print("5. Transposición columnar simple")
+        print("6. Cifrado Afín")
+        print("7. Sustitución simple")
+        print("0. Volver")
+
+        opcion = input("\nSeleccione una opción: ")
+
+        if opcion == "1":
+            cifrado_mod27()
+        elif opcion == "2":
+            cifrado_cesar()
+        elif opcion == "3":
+            cifrado_vernam()
+        elif opcion == "4":
+            cifrado_atbash()
+        elif opcion == "5":
+            transposicion_columnar()
+        elif opcion == "6":
+            cifrado_afin()
+        elif opcion == "7":
+            sustitucion_simple()
+        elif opcion == "0":
+            break
+        else:
+            print("Opción inválida")
+            pausar()
+
+# =============================
+# FUNCIONES MATEMÁTICA MODULAR
+# =============================
 
 def calcular_modulo():
     try:
@@ -226,6 +264,131 @@ def euclides_extendido():
         print("Error: entrada inválida")
 
     pausar()
+
+# ===============================
+# FUNCIONES CRIPTOGRAFÍA CLÁSICA
+# ===============================
+
+def cifrado_mod27():
+    texto = input("Ingrese el texto: ").lower()
+
+    resultado = ""
+
+    for letra in texto:
+        if letra.isalpha():
+            valor = ord(letra) - 97
+            cifrado = (valor % 27)
+            resultado += chr(cifrado + 97)
+        else:
+            resultado += letra
+
+    print(f"\nResultado: {resultado}")
+    pausar()
+
+def cifrado_cesar():
+    texto = input("Ingrese el texto: ").lower()
+    desplazamiento = int(input("Ingrese el desplazamiento: "))
+
+    resultado = ""
+
+    for letra in texto:
+        if letra.isalpha():
+            valor = ord(letra) - 97
+            cifrado = (valor + desplazamiento) % 26
+            resultado += chr(cifrado + 97)
+        else:
+            resultado += letra
+
+    print(f"\nTexto cifrado: {resultado}")
+    pausar()
+
+def cifrado_vernam():
+    texto = input("Ingrese el texto: ")
+    clave = input("Ingrese la clave: ")
+
+    resultado = ""
+
+    for i in range(len(texto)):
+        t = ord(texto[i])
+        k = ord(clave[i % len(clave)])
+        resultado += chr(t ^ k)
+
+    print(f"\nTexto cifrado: {resultado}")
+    pausar()
+
+def cifrado_atbash():
+    texto = input("Ingrese el texto: ").lower()
+
+    resultado = ""
+
+    for letra in texto:
+        if letra.isalpha():
+            resultado += chr(122 - (ord(letra) - 97))
+        else:
+            resultado += letra
+
+    print(f"\nResultado: {resultado}")
+    pausar()
+
+def transposicion_columnar():
+    texto = input("Ingrese el texto: ").replace(" ", "")
+    columnas = int(input("Número de columnas: "))
+
+    filas = (len(texto) + columnas - 1) // columnas
+
+    matriz = []
+
+    for i in range(filas):
+        fila = texto[i*columnas:(i+1)*columnas]
+        matriz.append(fila)
+
+    resultado = ""
+
+    for col in range(columnas):
+        for fila in matriz:
+            if col < len(fila):
+                resultado += fila[col]
+
+    print(f"\nTexto cifrado: {resultado}")
+    pausar()
+
+def cifrado_afin():
+    texto = input("Ingrese el texto: ").lower()
+    a = int(input("Ingrese valor de a: "))
+    b = int(input("Ingrese valor de b: "))
+
+    resultado = ""
+
+    for letra in texto:
+        if letra.isalpha():
+            x = ord(letra) - 97
+            cifrado = (a * x + b) % 26
+            resultado += chr(cifrado + 97)
+        else:
+            resultado += letra
+
+    print(f"\nTexto cifrado: {resultado}")
+    pausar()
+
+def sustitucion_simple():
+    alfabeto = "abcdefghijklmnopqrstuvwxyz"
+    clave = input("Ingrese alfabeto de sustitución (26 letras): ").lower()
+
+    texto = input("Ingrese el texto: ").lower()
+
+    resultado = ""
+
+    for letra in texto:
+        if letra.isalpha():
+            indice = alfabeto.index(letra)
+            resultado += clave[indice]
+        else:
+            resultado += letra
+
+    print(f"\nTexto cifrado: {resultado}")
+    pausar()
+
+
 # =========================
 # MAIN
 # =========================
