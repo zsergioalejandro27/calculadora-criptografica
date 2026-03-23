@@ -41,8 +41,7 @@ def menu_principal():
         elif opcion == "3":
             menu_criptografia_moderna()
         elif opcion == "4":
-            print("En construcción...")
-            pausar()
+            menu_hash()
         elif opcion == "5":
             print("En construcción...")
             pausar()
@@ -157,6 +156,33 @@ def menu_criptografia_moderna():
         else:
             print("Opción inválida")
             pausar()
+
+# ==========
+# MENÚ HASH
+# ==========
+def menu_hash():
+    while True:
+        limpiar()
+        print("=== ALGORITMOS HASH ===")
+        print("1. MD5")
+        print("2. SHA256")
+        print("3. SHA512")
+        print("0. Volver")
+
+        opcion = input("\nSeleccione una opción: ")
+
+        if opcion == "1":
+            hash_md5()
+        elif opcion == "2":
+            hash_sha256()
+        elif opcion == "3":
+            hash_sha512()
+        elif opcion == "0":
+            break
+        else:
+            print("Opción inválida")
+            pausar()
+
 
 # =============================
 # FUNCIONES MATEMÁTICA MODULAR
@@ -502,6 +528,37 @@ def exponenciacion_rapida():
         print("Error en los datos")
 
     pausar()
+
+
+# ==============
+# FUNCIONES HASH
+# ==============
+def hash_md5():
+    texto = input("Ingrese el texto: ")
+
+    resultado = hashlib.md5(texto.encode()).hexdigest()
+
+    print(f"\nMD5: {resultado}")
+    pausar()
+
+
+def hash_sha256():
+    texto = input("Ingrese el texto: ")
+
+    resultado = hashlib.sha256(texto.encode()).hexdigest()
+
+    print(f"\nSHA256: {resultado}")
+    pausar()
+
+
+def hash_sha512():
+    texto = input("Ingrese el texto: ")
+
+    resultado = hashlib.sha512(texto.encode()).hexdigest()
+
+    print(f"\nSHA512: {resultado}")
+    pausar()
+
 # =========================
 # MAIN
 # =========================
