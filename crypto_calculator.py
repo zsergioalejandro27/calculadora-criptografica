@@ -45,8 +45,7 @@ def menu_principal():
         elif opcion == "5":
             menu_codificacion()
         elif opcion == "6":
-            print("En construcción...")
-            pausar()
+            menu_salt()
         elif opcion == "0":
             print("Saliendo del programa...")
             break
@@ -211,6 +210,31 @@ def menu_codificacion():
             print("Opción inválida")
             pausar()
 
+# =========
+# MENÚ SALT
+# =========
+def menu_salt():
+    while True:
+        limpiar()
+        print("=== USO DE SALT ===")
+        print("1. Hash MD5 con SALT")
+        print("2. Hash SHA256 con SALT")
+        print("3. Hash SHA512 con SALT")
+        print("0. Volver")
+
+        opcion = input("\nSeleccione una opción: ")
+
+        if opcion == "1":
+            salt_md5()
+        elif opcion == "2":
+            salt_sha256()
+        elif opcion == "3":
+            salt_sha512()
+        elif opcion == "0":
+            break
+        else:
+            print("Opción inválida")
+            pausar()
 # =============================
 # FUNCIONES MATEMÁTICA MODULAR
 # =============================
@@ -649,6 +673,64 @@ def base64_codificacion():
         print(f"Texto: {resultado}")
 
     pausar()
+
+# ==============
+# FUNCIONES SALT
+# ==============
+def salt_md5():
+    password = input("Ingrese la contraseña: ")
+
+    salt1 = str(random.randint(1000, 9999))
+    salt2 = str(random.randint(1000, 9999))
+
+    hash1 = hashlib.md5((password + salt1).encode()).hexdigest()
+    hash2 = hashlib.md5((password + salt2).encode()).hexdigest()
+
+    print(f"\nSalt 1: {salt1}")
+    print(f"Hash 1: {hash1}")
+
+    print(f"\nSalt 2: {salt2}")
+    print(f"Hash 2: {hash2}")
+
+    pausar()
+
+
+def salt_sha256():
+    password = input("Ingrese la contraseña: ")
+
+    salt1 = str(random.randint(1000, 9999))
+    salt2 = str(random.randint(1000, 9999))
+
+    hash1 = hashlib.sha256((password + salt1).encode()).hexdigest()
+    hash2 = hashlib.sha256((password + salt2).encode()).hexdigest()
+
+    print(f"\nSalt 1: {salt1}")
+    print(f"Hash 1: {hash1}")
+
+    print(f"\nSalt 2: {salt2}")
+    print(f"Hash 2: {hash2}")
+
+    pausar()
+
+
+def salt_sha512():
+    password = input("Ingrese la contraseña: ")
+
+    salt1 = str(random.randint(1000, 9999))
+    salt2 = str(random.randint(1000, 9999))
+
+    hash1 = hashlib.sha512((password + salt1).encode()).hexdigest()
+    hash2 = hashlib.sha512((password + salt2).encode()).hexdigest()
+
+    print(f"\nSalt 1: {salt1}")
+    print(f"Hash 1: {hash1}")
+
+    print(f"\nSalt 2: {salt2}")
+    print(f"Hash 2: {hash2}")
+
+    pausar()
+
+
 # =========================
 # MAIN
 # =========================
