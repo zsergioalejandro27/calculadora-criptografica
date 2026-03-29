@@ -1,26 +1,26 @@
-# Calculadora Criptográfica
+# Cryptographic Calculator
 
-Proyecto en Python que implementa una calculadora con conceptos básicos de ciberseguridad.
+Python-based project that implements a cryptographic calculator covering fundamental cybersecurity concepts.
 
-## Funcionalidades
+## Features
 
-- Operaciones matemáticas modulares
-- Criptografía clásica
-- Criptografía moderna
-- Algoritmos hash
-- Codificación
-- Uso de SALT
+- Modular arithmetic operations
+- Classical cryptography (Caesar, Affine, Vernam, Atbash, etc.)
+- Modern cryptography (RSA, Diffie-Hellman)
+- Hash algorithms (MD5, SHA-256, SHA-512)
+- Encoding techniques (ASCII, Hex, Binary, Base64)
+- SALT usage for secure hashing
 
-## Ejecución
+## Execution
 
-Ejecutar el programa con:
+Run the program with:
 
 python crypto_calculator.py
 
-## Tecnologías
+## Technologies
 
 - Python 3
 
-## Autor
+## Author
 
 Sergio Alejandro
